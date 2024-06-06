@@ -8,7 +8,13 @@ export interface Category{
   id: string;
   name: string;
   billboard: Billboard;
+  subCategories: SubCategory[];
 };
+
+export interface SubCategory {
+  id :         String;
+  name:       String;
+}
 
 export interface Product{
   id: string;
