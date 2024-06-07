@@ -5,39 +5,67 @@ import { Category } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+
 interface MainNavProps{
   data: Category[];
 }
 
 
+
 const MainNav: React.FC<MainNavProps> = ({
   data
 }) => {
-  const pathname = usePathname()
+  // const pathname = usePathname()
 
-  const routes = data.map((route) => ({
-    href: `/category/${route.id}`,
-    label: route.name,
-    active: pathname === `/category/${route.id}`
-  }))
+  // const routes = data.map((route) => ({
+  //   href: `/category/${route.id}`,
+  //   label: route.name,
+  //   active: pathname === `/category/${route.id}`
+  // }))
 
   return(
-    <nav
-      className="mx-6 flex items-center space-x-4 lg:space-x-6"
-    >
-      {routes.map((route) => (
-        <Link 
-          key={route.href} 
-          href={route.href}
-          className={cn(
-            "text-sm font-medium transition-colors hover:text-black",
-            route.active ? "text-black" : "text-neutral-500"
-          )}
-        >
-          {route.label}
-        </Link>
-      ))}
-    </nav>
+    <NavigationMenu>
+      <NavigationMenuList>
+        {data.map((category) => (
+          <div key={category.id}>
+            {category.subCategories.length > 0 ? (
+              <NavigationMenuItem>
+              <NavigationMenuTrigger key={category.id}>
+                {category.name}
+              </NavigationMenuTrigger>
+
+              <NavigationMenuContent>
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                {category.subCategories.map((subCategory, index) => (
+                  
+                  
+                    <li key={index} className="row-span-3">
+                    <NavigationMenuLink key={index}>{subCategory.name}</NavigationMenuLink>
+                    </li>
+                  
+                  
+                ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+            ) : (
+              <p>{category.name}</p>
+            )}
+            
+          </div>
+        ))}
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
 
