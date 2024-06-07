@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Category } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NextLink from 'next/link';
 
 import {
   NavigationMenu,
@@ -32,6 +33,16 @@ const MainNav: React.FC<MainNavProps> = ({
   //   label: route.name,
   //   active: pathname === `/category/${route.id}`
   // }))
+  const Link = ({ href, ...props }) => {
+    const pathname = usePathname();
+    const isActive = href === pathname;
+  
+    return (
+      <NavigationMenuLink asChild active={isActive}>
+        <NextLink href={href} className="NavigationMenuLink" {...props} />
+      </NavigationMenuLink>
+    );
+  };
 
   return(
     <NavigationMenu>
@@ -41,16 +52,16 @@ const MainNav: React.FC<MainNavProps> = ({
             {category.subCategories.length > 0 ? (
               <NavigationMenuItem>
               <NavigationMenuTrigger key={category.id}>
-                {category.name}
+              <Link href={`/category/${category.id}`}>{category.name}</Link>
               </NavigationMenuTrigger>
 
               <NavigationMenuContent>
-              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[800px] lg:grid-cols-[.75fr_1fr]">
                 {category.subCategories.map((subCategory, index) => (
                   
                   
                     <li key={index} className="row-span-3">
-                    <NavigationMenuLink key={index}>{subCategory.name}</NavigationMenuLink>
+                    <Link key={index} href={`/category/${category.id}/${subCategory.id}`}>{subCategory.name}</Link>
                     </li>
                   
                   
@@ -59,7 +70,7 @@ const MainNav: React.FC<MainNavProps> = ({
               </NavigationMenuContent>
             </NavigationMenuItem>
             ) : (
-              <p>{category.name}</p>
+              <Link href={`/category/${category.id}`}>{category.name}</Link>
             )}
             
           </div>
