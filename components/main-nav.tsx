@@ -1,7 +1,7 @@
 "use client"
 
 import { cn } from "@/lib/utils";
-import { Category } from "@/types";
+import { Brand, Category, Sale, SubCategory } from "@/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import NextLink from 'next/link';
@@ -16,15 +16,22 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
+import { Fragment } from "react";
 
 interface MainNavProps{
   data: Category[];
+  categoriesOnSale: Category[];
+  sale: Sale;
+  brands: Brand[];
 }
 
 
 
 const MainNav: React.FC<MainNavProps> = ({
-  data
+  data,
+  categoriesOnSale,
+  sale,
+  brands
 }) => {
   // const pathname = usePathname()
 
@@ -47,6 +54,38 @@ const MainNav: React.FC<MainNavProps> = ({
   return(
     <NavigationMenu>
       <NavigationMenuList>
+        
+        {sale.active ? (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger key={sale.id}>
+              <Link className="text-red-600" href={`/sale`}>{sale.name}</Link>
+            </NavigationMenuTrigger>
+
+            <NavigationMenuContent>
+            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[800px] lg:grid-cols-[.75fr_1fr]">
+              {categoriesOnSale.map((categoryOnSale) => (
+                <Fragment key={categoryOnSale.id}>
+                  <li key={categoryOnSale.id} className="row-span-3">
+                    <Link key={categoryOnSale.id} href={`/sale/${categoryOnSale.name}`}>{categoryOnSale.name}</Link>
+                  </li>
+                  {categoryOnSale.subCategories.map((subCategoryOnSale) => (
+                    <li key={subCategoryOnSale.id} className="row-span-3">
+                      <Link key={subCategoryOnSale.id} href={`/sale/${categoryOnSale.name}`}>{subCategoryOnSale.name}</Link>
+                    </li>
+                  ))}
+                </Fragment>
+              ))}
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        ) 
+          : 
+          (
+          <div>
+
+          </div>
+        )}
+        
         {data.map((category) => (
           <div key={category.id}>
             {category.subCategories.length > 0 ? (
@@ -60,8 +99,8 @@ const MainNav: React.FC<MainNavProps> = ({
                 {category.subCategories.map((subCategory, index) => (
                   
                   
-                    <li key={index} className="row-span-3">
-                    <Link key={index} href={`/category/${category.id}/${subCategory.id}`}>{subCategory.name}</Link>
+                    <li key={subCategory.id} className="row-span-3">
+                    <Link key={subCategory.id} href={`/category/${category.id}/${subCategory.id}`}>{subCategory.name}</Link>
                     </li>
                   
                   
@@ -70,11 +109,32 @@ const MainNav: React.FC<MainNavProps> = ({
               </NavigationMenuContent>
             </NavigationMenuItem>
             ) : (
-              <Link href={`/category/${category.id}`}>{category.name}</Link>
+              
+              <Link className="text-sm font-medium" href={`/category/${category.id}`}>{category.name}</Link>
+              
             )}
             
           </div>
         ))}
+        
+        <NavigationMenuItem>
+            <NavigationMenuTrigger key={sale.id}>
+              <Link href={`/sale`}>Brands</Link>
+            </NavigationMenuTrigger>
+            <NavigationMenuContent>
+              <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[800px] lg:grid-cols-[.75fr_1fr]">
+                {brands.map((brand) => (
+                  
+                  
+                    <li key={brand.id} className="row-span-3">
+                    <Link key={brand.id} href={`/brands`}>{brand.name}</Link>
+                    </li>
+                  
+                  
+                ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )

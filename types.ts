@@ -12,8 +12,13 @@ export interface Category{
 };
 
 export interface SubCategory {
-  id :         String;
-  name:       String;
+  id :         string;
+  name:       string;
+}
+
+export interface Brand {
+  id :         string;
+  name:       string;
 }
 
 export interface Product{
@@ -30,6 +35,14 @@ export interface Product{
 export interface Image{
   id: string;
   url: string;
+}
+
+export interface Sale{
+  id:          string
+  name:        string
+  description?: string
+  imageUrl?:    string
+  active:      boolean
 }
 
 export interface Size{
