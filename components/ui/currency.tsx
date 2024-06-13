@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { useEffect, useState } from "react"
 
 const formatter = new Intl.NumberFormat("en-US", {
@@ -9,10 +10,12 @@ const formatter = new Intl.NumberFormat("en-US", {
 
 interface CurrencyProps{
   value?: string | number
+  className?: string
 }
 
 const Currency: React.FC<CurrencyProps> = ({
-  value
+  value,
+  className
 }) => {
   const [isMounted, setIsMounted] = useState(false)
 
@@ -25,9 +28,13 @@ const Currency: React.FC<CurrencyProps> = ({
   }
 
   return(
-    <div className="font-semibold">
+    <p className={cn(`
+    font-semibold
+    `,
+    className
+    )}>
       {formatter.format(Number(value))}
-    </div>
+    </p>
   )
 }
 
