@@ -21,6 +21,13 @@ export interface Brand {
   name:       string;
 }
 
+export interface SizeStock{
+  id :         string;
+  productId:   string;
+  value:       string;
+  amount:      number;
+}
+
 export interface Product{
   id: string;
   category: Category;
@@ -29,6 +36,7 @@ export interface Product{
   isFeatured: boolean;
   discount: boolean;
   discountPrice?: string;
+  stock: SizeStock[];
   size: Size;
   color: Color;
   images: Image[];
