@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { MouseEventHandler } from "react";
 import usePreviewModal from "@/hooks/use-preview-modal";
 import useCart from "@/hooks/use-cart";
+import Size from "./size";
 
 interface ProductCard{
   data: Product;
@@ -37,7 +38,7 @@ const ProductCard: React.FC<ProductCard> = ({
   }
 
   return(
-    <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl border p-3 space-y-4">
+    <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl  p-3 space-y-4">
       <div className="aspect-square rounded-xl bg-gray-100 relative">
         <Image 
           src={data?.images?.[0]?.url}
@@ -66,6 +67,11 @@ const ProductCard: React.FC<ProductCard> = ({
         <p className="text-sm text-gray-500">
           {data.category?.name}
         </p>
+      </div>
+      <div className="flex items-center gap-2">
+        {data?.stock?.map((size) => (
+          <Size size={size} />
+        ))}
       </div>
       {/* PRICE */}
       <div className="flex items-center gap-3">
