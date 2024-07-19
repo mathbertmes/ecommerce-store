@@ -1,19 +1,16 @@
-import getCategory from "@/actions/get-category";
-import getColors from "@/actions/get-colors";
 import getProducts from "@/actions/get-products";
-import getSizes from "@/actions/get-sizes";
-import Billboard from "@/components/billboard";
+import getSubCategory from "@/actions/get-subcategory";
 import Container from "@/components/ui/container";
-import Filter from "./components/filter";
 import NoResults from "@/components/ui/no-results";
 import ProductCard from "@/components/ui/product-card";
-import MobileFilters from "./components/mobile-filters";
+import { Separator } from "@/components/ui/separator";
 
 export const revalidate = 0;
 
-interface CategoryPageProps{
+interface SubCategoryPageProps{
   params: {
     categoryId: string;
+    subcategoryId: string;
   },
   searchParams: {
     colorId: string;
@@ -21,23 +18,27 @@ interface CategoryPageProps{
   }
 }
 
-const CategoryPage: React.FC<CategoryPageProps> = async ({
+const SubCategoryPage: React.FC<SubCategoryPageProps> = async ({
   params,
   searchParams
 }) => {
+
   const products = await getProducts({
     categoryId: params.categoryId,
+    subcategoryId: params.subcategoryId,
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId
   })
 
-  const category = await getCategory(params.categoryId)
+  const subcategory = await getSubCategory(params.subcategoryId)
   return(
     <div className="bg-white">
       <Container>
-        <Billboard 
-          data={category.billboard}
-        />
+        <div className="px-8 py-4 mb-4">
+        <h2 className="text-3xl font-bold tracking-tight mb-4">{subcategory.name}</h2>
+        <Separator />
+        </div>
+        
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors}/> */}
@@ -71,4 +72,4 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   )
 }
 
-export default CategoryPage;
+export default SubCategoryPage;

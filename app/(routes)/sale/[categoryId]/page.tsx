@@ -1,43 +1,45 @@
-import getCategory from "@/actions/get-category";
-import getColors from "@/actions/get-colors";
+import getBrand from "@/actions/get-brand";
 import getProducts from "@/actions/get-products";
-import getSizes from "@/actions/get-sizes";
-import Billboard from "@/components/billboard";
+import getSale from "@/actions/get-sale";
+import getSubCategory from "@/actions/get-subcategory";
 import Container from "@/components/ui/container";
-import Filter from "./components/filter";
 import NoResults from "@/components/ui/no-results";
 import ProductCard from "@/components/ui/product-card";
-import MobileFilters from "./components/mobile-filters";
+import { Separator } from "@/components/ui/separator";
 
 export const revalidate = 0;
 
-interface CategoryPageProps{
-  params: {
+interface SaleCategoryPageProps{
+  params:{
     categoryId: string;
-  },
+  }
   searchParams: {
     colorId: string;
     sizeId: string;
   }
 }
 
-const CategoryPage: React.FC<CategoryPageProps> = async ({
+const SaleCategoryPage: React.FC<SaleCategoryPageProps> = async ({
   params,
   searchParams
 }) => {
+
   const products = await getProducts({
     categoryId: params.categoryId,
+    discount: true,
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId
   })
 
-  const category = await getCategory(params.categoryId)
+  const sale = await getSale()
   return(
     <div className="bg-white">
       <Container>
-        <Billboard 
-          data={category.billboard}
-        />
+        <div className="px-8 py-4 mb-4">
+        <h2 className="text-3xl font-bold tracking-tight mb-4">{sale.name}</h2>
+        <Separator />
+        </div>
+        
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors}/> */}
@@ -71,4 +73,4 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   )
 }
 
-export default CategoryPage;
+export default SaleCategoryPage;
