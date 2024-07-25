@@ -17,6 +17,7 @@ interface SaleCategoryPageProps{
   searchParams: {
     colorId: string;
     sizeId: string;
+    sizeValue: string;
   }
 }
 
@@ -28,8 +29,14 @@ const SaleCategoryPage: React.FC<SaleCategoryPageProps> = async ({
   const products = await getProducts({
     categoryId: params.categoryId,
     discount: true,
+    sizeValue: searchParams.sizeValue,
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId
+  })
+
+  const productsForFilter = await getProducts({
+    categoryId: params.categoryId,
+    discount: true,
   })
 
   const sale = await getSale()
@@ -45,7 +52,7 @@ const SaleCategoryPage: React.FC<SaleCategoryPageProps> = async ({
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors}/> */}
             <div className="hidden lg:block ">
-            <Filter products={products}/>
+            <Filter products={productsForFilter} valueKey="sizeValue"/>
               {/* <Filter 
                 valueKey="sizeId"
                 name="Sizes"

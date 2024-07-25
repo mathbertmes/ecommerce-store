@@ -16,6 +16,7 @@ interface SubCategoryPageProps{
   searchParams: {
     colorId: string;
     sizeId: string;
+    sizeValue: string;
   }
 }
 
@@ -27,8 +28,14 @@ const SubCategoryPage: React.FC<SubCategoryPageProps> = async ({
   const products = await getProducts({
     categoryId: params.categoryId,
     subcategoryId: params.subcategoryId,
+    sizeValue: searchParams.sizeValue,
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId
+  })
+
+  const productsForFilter = await getProducts({
+    categoryId: params.categoryId,
+    subcategoryId: params.subcategoryId,
   })
 
   const subcategory = await getSubCategory(params.subcategoryId)
@@ -44,7 +51,7 @@ const SubCategoryPage: React.FC<SubCategoryPageProps> = async ({
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors}/> */}
             <div className="hidden lg:block ">
-            <Filter products={products}/>
+            <Filter valueKey="sizeValue" products={productsForFilter}/>
               {/* <Filter 
                 valueKey="sizeId"
                 name="Sizes"
