@@ -10,7 +10,7 @@ const Size : React.FC<SizeProps> = ({
   size
 }) => {
   return(
-    <div className={cn(`w-2 h-2 rounded-full border flex justify-center items-center text-xs p-4 cursor-pointer`)}>
+    <div key={size} className={cn(`w-2 h-2 rounded-full border flex justify-center items-center text-xs p-4 cursor-pointer`)}>
       <p>{size}</p>
     </div>
   )
