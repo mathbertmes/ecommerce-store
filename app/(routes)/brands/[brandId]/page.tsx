@@ -1,6 +1,7 @@
 import getBrand from "@/actions/get-brand";
 import getProducts from "@/actions/get-products";
 import getSubCategory from "@/actions/get-subcategory";
+import Filter from "@/components/filter";
 import Container from "@/components/ui/container";
 import NoResults from "@/components/ui/no-results";
 import ProductCard from "@/components/ui/product-card";
@@ -15,6 +16,7 @@ interface BrandPageProps{
   searchParams: {
     colorId: string;
     sizeId: string;
+    sizeValue: string;
   }
 }
 
@@ -25,8 +27,13 @@ const BrandPage: React.FC<BrandPageProps> = async ({
 
   const products = await getProducts({
     brandId: params.brandId,
+    sizeValue: searchParams.sizeValue,
     colorId: searchParams.colorId,
-    sizeId: searchParams.sizeId
+    sizeId: searchParams.sizeId,
+  })
+
+  const productsForFilter = await getProducts({
+    brandId: params.brandId,
   })
 
   const brand = await getBrand(params.brandId)
@@ -42,6 +49,7 @@ const BrandPage: React.FC<BrandPageProps> = async ({
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors}/> */}
             <div className="hidden lg:block ">
+            <Filter valueKey="sizeValue" products={productsForFilter}/>
               {/* <Filter 
                 valueKey="sizeId"
                 name="Sizes"

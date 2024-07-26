@@ -70,7 +70,7 @@ const ProductCard: React.FC<ProductCard> = ({
       </div>
       <div className="flex items-center gap-2">
         {data?.stock?.map((size) => (
-          <Size size={size} />
+          <Size key={size.id} size={size.value} />
         ))}
       </div>
       {/* PRICE */}

@@ -4,10 +4,10 @@ import getProducts from "@/actions/get-products";
 import getSizes from "@/actions/get-sizes";
 import Billboard from "@/components/billboard";
 import Container from "@/components/ui/container";
-import Filter from "./components/filter";
 import NoResults from "@/components/ui/no-results";
 import ProductCard from "@/components/ui/product-card";
 import MobileFilters from "./components/mobile-filters";
+import Filter from "@/components/filter";
 
 export const revalidate = 0;
 
@@ -18,6 +18,7 @@ interface CategoryPageProps{
   searchParams: {
     colorId: string;
     sizeId: string;
+    sizeValue: string;
   }
 }
 
@@ -28,7 +29,12 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   const products = await getProducts({
     categoryId: params.categoryId,
     colorId: searchParams.colorId,
-    sizeId: searchParams.sizeId
+    sizeId: searchParams.sizeId,
+    sizeValue: searchParams.sizeValue
+  })
+
+  const productsForFilter = await getProducts({
+    categoryId: params.categoryId,
   })
 
   const category = await getCategory(params.categoryId)
@@ -42,6 +48,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             {/* <MobileFilters sizes={sizes} colors={colors}/> */}
             <div className="hidden lg:block ">
+            <Filter products={productsForFilter} valueKey="sizeValue"/>
               {/* <Filter 
                 valueKey="sizeId"
                 name="Sizes"
