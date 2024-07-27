@@ -5,6 +5,7 @@ import Currency from "@/components/ui/currency";
 import Button from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import useCart from "@/hooks/use-cart";
+import Size from "./ui/size";
 
 
 interface InfoProps{
@@ -32,7 +33,11 @@ const Info: React.FC<InfoProps> = ({
         <div className="flex items-center gap-x-4">
           <h3 className="font-semibold text-black">Size:</h3>
           <div>
-            {data?.size?.value}
+          <div className="flex items-center gap-2">
+            {data?.stock?.map((size) => (
+              <Size key={size.id} size={size.value} />
+            ))}
+      </div>
           </div>
         </div>
         <div className="flex items-center gap-x-4">
