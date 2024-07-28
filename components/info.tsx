@@ -18,6 +18,7 @@ const Info: React.FC<InfoProps> = ({
   const cart = useCart()
 
   const onAddToCart = () => {
+    //implement size logic
     cart.addItem(data)
   }
   return(
