@@ -46,6 +46,7 @@ const MainNav: React.FC<MainNavProps> = ({
     className?: string;
   }
   
+  //children render
   const Link: React.FC<CustomLinkProps > = ({href, className = '' ,children, ...props}) => {
     const pathname = usePathname();
     const isActive = href === pathname;
