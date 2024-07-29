@@ -1,6 +1,6 @@
 "use client"
 
-import { Product } from "@/types";
+import { Product, ProductSelected } from "@/types";
 import Image from "next/image"
 import { toast } from "react-hot-toast";
 import { X } from "lucide-react"
@@ -10,7 +10,7 @@ import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 
 interface CartItemProps{
-  data: Product;
+  data: ProductSelected;
 }
 
 const CartItem: React.FC<CartItemProps> = ({
@@ -43,10 +43,9 @@ const CartItem: React.FC<CartItemProps> = ({
             </p>
           </div>
           <div className="mt-1 flex text-sm">
-            <p className="text-gray-500">{data.color.name}</p>
-            <p className="text-gray-500 ml-4 border-l border-gray-200 pl-4">{data.size.name}</p>
+            <p className="text-gray-500 ml-4 border-l border-gray-200 pl-4">{data.sizeSelected.value}</p>
           </div>
-          <Currency value={data.price}/>
+          <Currency value={data.discountPrice ? data.discountPrice  : data.price}/>
         </div>
       </div>
     </li>
