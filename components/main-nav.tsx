@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Brand, Category, Sale, SubCategory } from "@/types";
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
 import NextLink from "next/link";
 
@@ -16,7 +16,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 
 interface MainNavProps {
   data: Category[];
@@ -40,13 +40,21 @@ const MainNav: React.FC<MainNavProps> = ({
   // }))
 
   //CHANGE PARAMETERS TYPES
-  const Link = (href : any, ...props : any) => {
+
+  interface CustomLinkProps extends LinkProps {
+    children: ReactNode;
+    className?: string;
+  }
+  
+  const Link: React.FC<CustomLinkProps > = ({href, className = '' ,children, ...props}) => {
     const pathname = usePathname();
     const isActive = href === pathname;
 
     return (
       <NavigationMenuLink asChild active={isActive}>
-        <NextLink href={href} className='NavigationMenuLink' {...props} />
+        <NextLink href={href} className={`NavigationMenuLink ${className}`} {...props}>
+          {children}
+        </NextLink>
       </NavigationMenuLink>
     );
   };
