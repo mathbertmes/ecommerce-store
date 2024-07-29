@@ -31,11 +31,12 @@ const ProductCard: React.FC<ProductCard> = ({
     previewModal.onOpen(data)
   }
 
-  const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
-    event.stopPropagation()
+  //NOW YOU HAVE TO SELECT YOUR SIZE FIRST, SO ADD TO CART STRAIGHT FROM PRODUCT CARD IS IMPOSSIBLE
+  // const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
+  //   event.stopPropagation()
 
-    cart.addItem(data)
-  }
+  //   cart.addItem(data)
+  // }
 
   return(
     <div onClick={handleClick} className="bg-white group cursor-pointer rounded-xl  p-3 space-y-4">
@@ -53,7 +54,6 @@ const ProductCard: React.FC<ProductCard> = ({
               icon={<Expand size={20} className="text-gray-600"/>}
             />
             <IconButton 
-              onClick={onAddToCart}
               icon={<ShoppingCart size={20} className="text-gray-600"/>}
             />
           </div>
