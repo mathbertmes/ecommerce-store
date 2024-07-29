@@ -1,11 +1,11 @@
-import { Product } from "@/types";
+import { Product, ProductSelected } from "@/types";
 import toast from "react-hot-toast";
 import { create } from "zustand"
 import { persist, createJSONStorage } from "zustand/middleware"
 
 interface CartStore{
-  items: Product[];
-  addItem: (data: Product) => void;
+  items: ProductSelected[];
+  addItem: (data: ProductSelected) => void;
   removeItem: (id: string) => void;
   removeAll: () => void;
 }
@@ -13,7 +13,7 @@ interface CartStore{
 const useCart = create(
   persist<CartStore>((set, get) => ({
     items: [],
-    addItem: (data: Product) => {
+    addItem: (data: ProductSelected) => {
       const currentItems = get().items;
       const existingItem = currentItems.find((item) => item.id === data.id)
 
