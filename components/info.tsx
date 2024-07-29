@@ -45,7 +45,7 @@ const Info: React.FC<InfoProps> = ({
           <div className="flex items-center gap-2">
             <select value={sizeSelected} onChange={(e) => setSizeSelected(e.target.value)} className="w-[100px] border cursor-pointer rounded-lg p-2"  name="" id="">
             {data?.stock?.map((size) => (
-              <option className="p-2 cursor-pointer" value={size.id}>
+              <option key={size.id} className="p-2 cursor-pointer" value={size.id}>
                 {size.value}
               </option>
             ))}

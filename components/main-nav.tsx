@@ -38,7 +38,9 @@ const MainNav: React.FC<MainNavProps> = ({
   //   label: route.name,
   //   active: pathname === `/category/${route.id}`
   // }))
-  const Link = ({ href, ...props }) => {
+
+  //CHANGE PARAMETERS TYPES
+  const Link = (href : any, ...props : any) => {
     const pathname = usePathname();
     const isActive = href === pathname;
 
