@@ -42,6 +42,10 @@ export interface Product{
   images: Image[];
 }
 
+export interface ProductSelected extends Product{
+  sizeSelected: SizeStock;
+}
+
 export interface Image{
   id: string;
   url: string;
