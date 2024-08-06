@@ -7,6 +7,7 @@ import { ShoppingCart } from "lucide-react";
 import useCart from "@/hooks/use-cart";
 import Size from "./ui/size";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 
 interface InfoProps{
@@ -45,7 +46,10 @@ const Info: React.FC<InfoProps> = ({
           <div className="flex items-center gap-2">
             <select value={sizeSelected} onChange={(e) => setSizeSelected(e.target.value)} className="w-[100px] border cursor-pointer rounded-lg p-2"  name="" id="">
             {data?.stock?.map((size) => (
-              <option key={size.id} className="p-2 cursor-pointer" value={size.id}>
+              <option 
+              key={size.id} className={cn("p-2 cursor-pointer", size.amount === 2 && "bg-gray-400 decoration-dashed")}
+              disabled={size.amount === 2} 
+              value={size.id}>
                 {size.value}
               </option>
             ))}
