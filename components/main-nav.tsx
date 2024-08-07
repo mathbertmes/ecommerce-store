@@ -135,8 +135,8 @@ const MainNav: React.FC<MainNavProps> = ({
             )}
           </div>
         ))}
-
-        <NavigationMenuItem>
+        {brands.length > 0 && 
+          <NavigationMenuItem>
           <NavigationMenuTrigger key={sale.id}>
             <Link href={`/sale`}>Brands</Link>
           </NavigationMenuTrigger>
@@ -152,6 +152,8 @@ const MainNav: React.FC<MainNavProps> = ({
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+        }
+        
       </NavigationMenuList>
     </NavigationMenu>
   );

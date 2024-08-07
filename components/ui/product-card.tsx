@@ -53,9 +53,9 @@ const ProductCard: React.FC<ProductCard> = ({
               onClick={onPreview}
               icon={<Expand size={20} className="text-gray-600"/>}
             />
-            <IconButton 
+            {/* <IconButton 
               icon={<ShoppingCart size={20} className="text-gray-600"/>}
-            />
+            /> */}
           </div>
         </div>
       </div>
