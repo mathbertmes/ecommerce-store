@@ -44,7 +44,7 @@ const Info: React.FC<InfoProps> = ({
           <h3 className="font-semibold text-black">Sizes:</h3>
           <div>
           <div className="flex items-center gap-2">
-            <select value={sizeSelected} onChange={(e) => setSizeSelected(e.target.value)} className="w-[100px] border cursor-pointer rounded-lg p-2"  name="" id="">
+            {/* <select value={sizeSelected} onChange={(e) => setSizeSelected(e.target.value)} className="w-[100px] border cursor-pointer rounded-lg p-2"  name="" id="">
             {data?.stock?.map((size) => (
               <option 
               key={size.id} className={cn("p-2 cursor-pointer", size.amount === 2 && "bg-gray-400 decoration-dashed")}
@@ -53,7 +53,15 @@ const Info: React.FC<InfoProps> = ({
                 {size.value}
               </option>
             ))}
-            </select>
+            </select> */}
+            {data?.stock?.map((size) => (
+              <div 
+              key={size.id} 
+              onClick={() => setSizeSelected(size.id)}
+              className={cn(`w-2 h-2 rounded-full border flex justify-center items-center text-xs p-4 cursor-pointer`, sizeSelected === size.id && "border-black font-semibold")}>
+              <p>{size.value}</p>
+            </div>
+            ))}
       </div>
           </div>
         </div>
