@@ -127,7 +127,7 @@ const MainNav: React.FC<MainNavProps> = ({
               </NavigationMenuItem>
             ) : (
               <Link
-                className='text-sm font-medium'
+                className='text-sm font-medium p-6'
                 href={`/category/${category.id}`}
               >
                 {category.name}
