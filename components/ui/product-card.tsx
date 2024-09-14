@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCard> = ({
           {data.category?.name}
         </p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center w-full flex-wrap gap-2">
         {data?.stock?.map((size) => (
           <Size key={size.id} size={size.value} />
         ))}
