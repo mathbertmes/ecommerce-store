@@ -9,7 +9,6 @@ interface MobileMenuModal{
 
 const useMobileMenu = create<MobileMenuModal>((set) => ({
   isOpen: false,
-  data: undefined,
   onOpen : () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false })
 
