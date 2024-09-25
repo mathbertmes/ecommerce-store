@@ -3,7 +3,7 @@ import { create } from "zustand"
 
 interface MobileMenuModal{
   isOpen : boolean;
-  onOpen: (data: Product) => void;
+  onOpen: () => void;
   onClose: () => void;
 }
 
