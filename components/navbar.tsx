@@ -8,6 +8,7 @@ import getCategoriesOnSale from "@/actions/get-categories-on-sale";
 import getSale from "@/actions/get-sale";
 import getBrands from "@/actions/get-brands";
 import MobileMenuIcon from "./mobile-menu-icon";
+import MenuMobile from "./menu-mobile/menu-mobile";
 
 
 export const revalidate =0;
@@ -18,6 +19,8 @@ const Navbar = async () => {
   const sale = await getSale()
   const brands = await getBrands()
   return(
+    <>
+    <MenuMobile categories={categories} categoriesOnSale={categoriesOnSale} sale={sale} brands={brands}/>
     <div className="border-b">
       <Container>
         <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
@@ -32,6 +35,7 @@ const Navbar = async () => {
         </div>
       </Container>
     </div>
+    </>
   )
 }
 
