@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import ToastProvider from "@/providers/toast-provider";
 import ModalProvider from "@/providers/modal-provider";
 
+
 const font = Urbanist({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

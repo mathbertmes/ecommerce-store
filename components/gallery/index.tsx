@@ -29,9 +29,10 @@ const Gallery: React.FC<GalleryProps> = ({
               <div className="aspect-square relative h-full w-full sm:rounded-lg overflow-hidden">
                 <Image 
                   fill
+                  objectFit="cover"
                   src={image.url}
                   alt="Image"
-                  className="object-fill object-center"
+                  className=""
                 />
               </div>
             </Tab.Panel>
