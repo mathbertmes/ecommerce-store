@@ -24,9 +24,9 @@ const Billboard: React.FC<BillboardProps> = ({
   return(
     <div className="p-4 sm:p-6 lg:p-8 rounded-xl overflow-hidden">
       <div 
-        className="rounded-xl relative w-full md:aspect-[2.4/1] overflow-hidden bg-cover"
+        className="rounded-xl relative w-full aspect-[2/1] md:aspect-[2.4/1] cursor-pointer overflow-hidden bg-cover"
       >
-        <Image onClick={handleClickSaleBanner} src={data} width={500} height={900} objectFit="contain" alt="Banner image">
+        <Image onClick={handleClickSaleBanner} src={data}  fill alt="Banner image">
 
         </Image>
         {/* <div className="h-full w-full flex flex-col justify-center items-center text-center gap-y-8">
